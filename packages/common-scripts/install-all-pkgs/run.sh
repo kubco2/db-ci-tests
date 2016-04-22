@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Caution: This is common script that is shared by more SCLS.
+# Caution: This is common script that is shared by more packages.
 # If you need to do changes related to this particular collection,
 # create a copy of this file instead of symlink.
 
