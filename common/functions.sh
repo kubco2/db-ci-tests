@@ -17,7 +17,7 @@ get_repo_name() {
 
 get_all_packages_in_repo() {
   packagename="${1}"
-  repotype=${REPOTYPE-updates-candidate}
+  repotype=${REPOTYPE-updates-testing-pending}
   el_version="${2-`os_major_version`}"
   repo_name=$(get_repo_name "${el_version}" "${repotype}")
   dnf repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q
