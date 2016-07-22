@@ -37,4 +37,4 @@ chmod a+x ${test_dir}/run*sh
 cp ${THISDIR}/Makefile ${test_dir}/
 
 echo "Test ready at ${test_dir}. To run it:"
-echo "cd ${test_dir} ; ./run1minutetip.sh"
+eval "pushd ${test_dir} ; ./run1minutetip.sh ; popd"
