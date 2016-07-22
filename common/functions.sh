@@ -28,12 +28,12 @@ get_all_packages_in_repo() {
 # * package name
 # * el_version (24, 25, ...), optional
 # The following environment variables can be set to change default values:
-# * REPOTYPE, if not set, then updates-candidate
+# * REPOTYPE, if not set, then updates-testing-pending
 # * REPOFILE, if not set, then db-ci.repo
 # * SKIP_REPO_CREATE, if set to 1, then no repository is created
 generate_repo() {
   [ "0$SKIP_REPO_CREATE" -eq 1 ] && return
-  repotype=${REPOTYPE-updates-candidate}
+  repotype=${REPOTYPE-updates-testing-pending}
   packagename="${1}"
   el_version="${2-`os_major_version`}"
   repo_name=$(get_repo_name "${el_version}" "${repotype}")

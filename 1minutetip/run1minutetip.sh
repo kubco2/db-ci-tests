@@ -1,5 +1,7 @@
 #!/bin/bash
 
+THISDIR=$(dirname ${BASH_SOURCE[0]})
+
 if [ $# -lt 1 ] ; then
   echo "Usage: `basename $0` <package> [ <package> ]"
   exit 1
@@ -32,7 +34,7 @@ EOF
 done
 
 chmod a+x ${test_dir}/run*sh
-cp Makefile ${test_dir}/
+cp ${THISDIR}/Makefile ${test_dir}/
 
 echo "Test ready at ${test_dir}. To run it:"
 echo "cd ${test_dir} ; ./run1minutetip.sh"
