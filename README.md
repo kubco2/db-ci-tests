@@ -23,9 +23,19 @@ cd packages/mariadb/install
 ./run.sh
 ```
 
+To download a specific NVR from koji and run tests against it, run:
+```
+./run-nvr.sh <package> <nvr>
+```
+For example:
+```
+./run-nvr.sh mariadb mariadb-10.1.17-1.fc25
+```
+
 ##Structure of tests
 ```
     ├── run.sh      -- main entrypoint to run the tests
+    ├── run-nvr.sh  -- main entrypoint to run the tests for a specific NVR from koji
     ├── common      -- contains files common for all tests
     ├── packages -- contains tests for all packages
         │
