@@ -2,6 +2,8 @@
 
 This repository includes various tests that will be run for verifying database packages in Fedora.
 
+Dependencies for these tests are the following fedora packages: `koji` `createrepo` `git` `wget` `vim`
+
 To run all tests for a package `mariadb` on Fedora, run the `./run.sh` with name(s) of the package:
 ```
 ./run.sh mariadb
