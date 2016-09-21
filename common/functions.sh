@@ -20,7 +20,11 @@ get_all_packages_in_repo() {
   repotype=${REPOTYPE-updates-testing-pending}
   el_version="${2-`os_major_version`}"
   repo_name=$(get_repo_name "${el_version}" "${repotype}")
-  dnf repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q
+  if [ `os_major_version` -gt 7 ] ; then
+    dnf repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q
+  else
+    repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q -a
+  fi
 }
 
 # generate a yum repo file for downloaded data and write it to stdout
@@ -59,7 +63,7 @@ gpgcheck=0
 enabled=1
 
 EOM
-    dnf clean all --disablerepo=\* --enablerepo=${repo_name}
+    yum clean all --disablerepo=\* --enablerepo=${repo_name}
   fi
 }
 
