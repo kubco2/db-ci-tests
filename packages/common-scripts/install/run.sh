@@ -10,5 +10,5 @@ source ${THISDIR}/../include.sh
 
 generate_repo "$PACKAGE"
 
-yum install -y --refresh ${INSTALL_PKGS}
+yum install -y ${INSTALL_PKGS}
 exit $?

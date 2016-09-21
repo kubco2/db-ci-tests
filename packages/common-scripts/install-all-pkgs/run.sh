@@ -9,5 +9,5 @@ source ${THISDIR}/../../../common/functions.sh
 source ${THISDIR}/../include.sh
 
 set -e
-yum -y install --refresh `get_all_packages_in_repo "${PACKAGE}"`
+yum -y install `get_all_packages_in_repo "${PACKAGE}"`
 
