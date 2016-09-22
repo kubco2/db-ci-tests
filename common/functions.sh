@@ -19,7 +19,8 @@ get_all_packages_in_repo() {
   packagename="${1}"
   repotype=${REPOTYPE-updates-testing-pending}
   el_version="${2-`os_major_version`}"
-  repo_name=$(get_repo_name "${el_version}" "${repotype}")
+  repo_name_default=$(get_repo_name "${el_version}" "${repotype}")
+  repo_name=${REPONAME-$repo_name_default}
   if [ `os_major_version` -gt 7 ] ; then
     dnf repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q
   else
