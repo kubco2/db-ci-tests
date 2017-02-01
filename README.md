@@ -2,6 +2,8 @@
 
 This repository includes various tests that will be run for verifying database packages in Fedora.
 
+**Warning: All scripts in this repo are expected to be run as root user, since they usually install packages and do other things where root permissions are expected. That said, do not run anything in this repo on a machine you care about, it might potentially break your system. All tests are considered potentially destructive.**
+
 Dependencies for these tests are the following fedora packages: `koji` `createrepo` `git` `wget` `vim`
 
 To run all tests for a package `mariadb` on Fedora, run the `./run.sh` with name(s) of the package:
