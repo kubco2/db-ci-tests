@@ -1,0 +1,1 @@
+../../cassandra-common/basic-usage/run.sh
