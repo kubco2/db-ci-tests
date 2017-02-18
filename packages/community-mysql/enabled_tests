@@ -4,3 +4,4 @@ service-start
 basic-usage
 service-stop
 uninstall
+parallel-mysql

@@ -1,0 +1,1 @@
+../../mysql-common/parallel-mysql/run.sh
