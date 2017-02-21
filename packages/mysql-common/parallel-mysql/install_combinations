@@ -3,6 +3,9 @@
 # this script tests parallel installability of mariadb and community-mysql
 # also checks bz#1421092
 
+# clear cache
+dnf clean all
+
 set -ex
 
 _show_installed() {
@@ -10,51 +13,51 @@ _show_installed() {
 }
 
 _check_installed() {
-  rpm -V $@ && echo PASS || { echo FAIL ; _show_installed ; }
+  rpm -V --quiet $@ && echo -e "PASS\n" || { echo FAIL ; _show_installed ; }
 }
 
 _check_not_installed() {
-  ! rpm -V $@  && echo PASS || { echo FAIL ; _show_installed ; }
+  ! rpm -V --quiet $@  && echo -e "PASS\n" || { echo FAIL ; _show_installed ; }
 }
 
 _clear_pkgs() {
-  dnf -y remove mariadb\* community-mysql\* || :
+  dnf -yq remove mariadb\* community-mysql\* || :
 }
-	
-echo "Test checkpoint #1"
+
+echo "Test checkpoint #1 : client-server combinations"
 _clear_pkgs
 _check_not_installed mariadb-server mariadb-server-utils mariadb community-mysql-server community-mysql
 
-dnf -y install mariadb-server --setopt=install_weak_deps=False
+dnf -yq install mariadb-server --setopt=install_weak_deps=False
 _check_installed mariadb-server mariadb
 _check_not_installed mariadb-server-utils
 
-dnf -y install mariadb-server community-mysql --allowerasing
+dnf -yq install mariadb-server community-mysql --allowerasing
 _check_installed mariadb-server community-mysql
-_check_not_installed mariadb-server-utils community-mysql-server
+_check_not_installed mariadb mariadb-server-utils community-mysql-server
 
-dnf -y install mariadb-server mariadb-server-utils mariadb --allowerasing
-_check_installed mariadb-server mariadb mariadb-server-utils
+dnf -yq install mariadb-server mariadb-server-utils mariadb --allowerasing
+_check_installed mariadb mariadb-server mariadb mariadb-server-utils
 _check_not_installed community-mysql-server
 
-dnf -y install community-mysql-server --allowerasing
+dnf -yq install community-mysql-server --allowerasing
 _check_installed community-mysql-server
 _check_not_installed mariadb-server mariadb-server-utils
 
 
-echo "Test checkpoint #2"
+echo "Test checkpoint #2 : server-utils subpackage"
 _clear_pkgs
 _check_not_installed mariadb-server mariadb-server-utils mariadb community-mysql-server community-mysql
 
-dnf -y install mariadb-server --exclude mariadb-server-utils
+dnf -yq install mariadb-server --exclude mariadb-server-utils
 _check_installed mariadb-server mariadb
 _check_not_installed mariadb-server-utils community-mysql-server community-mysql
 
-dnf -y install mariadb-server mariadb-server-utils
+dnf -yq install mariadb-server mariadb-server-utils
 _check_installed mariadb-server mariadb-server-utils mariadb
 _check_not_installed community-mysql-server community-mysql
 
-dnf -y remove mariadb-server-utils
+dnf -yq remove mariadb-server-utils
 _check_installed mariadb-server mariadb
 _check_not_installed mariadb-server-utils community-mysql-server community-mysql
 
@@ -63,19 +66,19 @@ echo "Test checkpoint #3"
 _clear_pkgs
 _check_not_installed mariadb-server mariadb-server-utils mariadb community-mysql-server community-mysql
 
-dnf -y install community-mysql-server
+dnf -yq install community-mysql-server
 _check_installed community-mysql-server community-mysql
 _check_not_installed mariadb-server mariadb mariadb-server-utils
 
-dnf -y install mariadb-server --allowerasing
+dnf -yq install mariadb-server --allowerasing
 _check_installed mariadb-server community-mysql mariadb-server-utils
 _check_not_installed community-mysql-server mariadb
 
-dnf -y remove mariadb-server-utils
+dnf -yq remove mariadb-server-utils
 _check_installed mariadb-server community-mysql
 _check_not_installed community-mysql-server mariadb mariadb-server-utils
 
-dnf -y install community-mysql-server --allowerasing
+dnf -yq install community-mysql-server --allowerasing
 _check_installed community-mysql-server community-mysql
 _check_not_installed mariadb-server mariadb mariadb-server-utils
 
