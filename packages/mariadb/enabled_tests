@@ -2,6 +2,8 @@ install
 install-all-pkgs
 service-start
 basic-usage
+multiple-instances
+basic-galera
 service-stop
 uninstall
 parallel-mysql
