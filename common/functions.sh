@@ -27,9 +27,9 @@ get_all_packages_in_repo() {
     return
   fi
   if [ `os_major_version` -gt 7 ] ; then
-    dnf repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q
+    dnf repoquery --disablerepo=\* --enablerepo=${repo_name} -q
   else
-    repoquery --disablerepo=\* --enablerepo=${repo_name} --repoid=${repo_name} -q -a
+    repoquery --disablerepo=\* --enablerepo=${repo_name} -q -a
   fi
 }
 
