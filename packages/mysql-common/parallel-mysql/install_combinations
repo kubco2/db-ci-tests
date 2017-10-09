@@ -82,5 +82,9 @@ dnf -yq install community-mysql-server --allowerasing
 _check_installed community-mysql-server community-mysql
 _check_not_installed mariadb-server mariadb mariadb-server-utils
 
+
+
+_clear_pkgs
+
 unset _show_installed _check_installed _check_not_installed _clear_pkgs
 
