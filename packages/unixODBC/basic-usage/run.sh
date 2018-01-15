@@ -18,7 +18,7 @@ set -ex
 postgresql-setup --initdb || :
 service postgresql restart
 
-cp odbc-pgsql.ini /etc/odbc.ini
+cp "${THISDIR}/odbc-pgsql.ini" /etc/odbc.ini
 restorecon -v /etc/odbc.ini
 
 # Run a trivial query using isql in batch mode
@@ -41,7 +41,7 @@ grep "ERROR" "${tempout}" && failtest "'ERROR' found in isql output ${tempout}: 
 # MariaDB connector test
 service mariadb start
 
-cp odbc-mariadb.ini /etc/odbc.ini
+cp "${THISDIR}/odbc-mariadb.ini" /etc/odbc.ini
 restorecon /etc/odbc.ini
 
 # Run a trivial query using isql
