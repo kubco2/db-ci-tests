@@ -12,10 +12,11 @@ function failtest() {
   result=1
 }
 
+set -ex
 
 # PostgreSQL connector test
-postgresql-setup --initdb
-service postgresql start
+postgresql-setup --initdb || :
+service postgresql restart
 
 cp odbc-pgsql.ini /etc/odbc.ini
 restorecon -v /etc/odbc.ini
@@ -52,3 +53,4 @@ grep "56088" "${tempout}" || failtest "'56088' not found in isql output ${tempou
 grep "1 row" "${tempout}" || failtest "'1 row' not found in isql output ${tempout}: `cat ${tempout}`"
 grep "ERROR" "${tempout}" && failtest "'ERROR' found in isql output ${tempout}: `cat ${tempout}`"
 
+exit "${result}"
