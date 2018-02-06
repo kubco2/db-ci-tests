@@ -9,6 +9,8 @@ usage() {
 
 [ $# -lt 1 ] && usage
 
+dnf install -y koji createrepo
+
 packages=""
 while [ -d "${THISDIR}/packages/$1" ] ; do
   packages="$packages $1"
@@ -21,14 +23,14 @@ while [ -n "$1" ] ; do
   koji download-build -a noarch -a x86_64 $1
   shift
 done
-createrepo_c .
+createrepo .
 popd
 
 cat >/etc/yum.repos.d/db-ci.repo <<EOF
 [db-ci]
 name=db-ci
 baseurl=file://${repodir}
-enabled=0
+enabled=1
 gpgcheck=0
 EOF
 
