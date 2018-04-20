@@ -31,6 +31,7 @@ cat >/etc/yum.repos.d/db-ci.repo <<EOF
 name=db-ci
 baseurl=file://${repodir}
 enabled=1
+priority=1
 gpgcheck=0
 EOF
 
