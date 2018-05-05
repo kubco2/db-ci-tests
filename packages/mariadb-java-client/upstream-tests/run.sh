@@ -1,0 +1,1 @@
+../../mariadb-java-client-common/upstream-tests/run.sh
