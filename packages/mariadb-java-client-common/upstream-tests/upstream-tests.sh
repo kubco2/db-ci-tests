@@ -101,18 +101,15 @@ run_test() {
 	# import JUnit
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/hamcrest/core.jar
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/junit.jar
-	
 	# MariaDB
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/mariadb-java-client.jar
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/mariadb-java-client-tests.jar
-	
 	# slf4j
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/slf4j/slf4j-api.jar
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/slf4j/slf4j-simple.jar
 	# AWS
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/aws-sdk-java/aws-java-sdk-core.jar
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/aws-sdk-java/aws-java-sdk-rds.jar
-	
 	# other dependencies
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/HikariCP.jar
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/jna.jar
@@ -123,13 +120,13 @@ run_test() {
 run_all() {
 	local FAILED=false
 	echo "$RUN_TESTS" | while read test; do
-		echo $test
+		echo "Run test: '$test'"
 		run_test $test || FAILED=true
 	done
 	[ "$FAILED" == "true" ] && {
-	echo '********************************'
-	echo '************ THERE ARE FAILURES!'
-	echo '********************************'
+	echo '*********************************'
+	echo '************ TESTS HAVE FAILURES!'
+	echo '*********************************'
 	return 1
 	}
 	[ "$FAILED" == "false" ] && {
