@@ -119,10 +119,10 @@ run_test() {
 
 run_all() {
 	local FAILED=false
-	echo "$RUN_TESTS" | while read test; do
+	while read -r test; do
 		echo "Run test: '$test'"
 		run_test $test || FAILED=true
-	done
+	done <<< "$RUN_TESTS"
 	[ "$FAILED" == "true" ] && {
 	echo '*********************************'
 	echo '************ TESTS HAVE FAILURES!'
