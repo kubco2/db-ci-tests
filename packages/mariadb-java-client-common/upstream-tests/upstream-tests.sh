@@ -1,6 +1,6 @@
 #!/bin/bash
 
-yum install mariadb-java-client mariadb-java-client-tests hamcrest junit mariadb-server
+yum install -y mariadb-java-client mariadb-java-client-tests hamcrest junit mariadb-server
 
 # command to obtain all tests in Java format
 # find org -name '*Test.java' | cut -d'.' -f1 | tr '/' '.'
