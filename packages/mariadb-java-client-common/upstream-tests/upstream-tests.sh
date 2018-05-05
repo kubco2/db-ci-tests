@@ -104,15 +104,14 @@ run_test() {
 	# MariaDB
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/mariadb-java-client.jar
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/mariadb-java-client-tests.jar
-	# slf4j
+	# other dependencies
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/slf4j/slf4j-api.jar
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/slf4j/slf4j-simple.jar
-	# AWS
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/aws-sdk-java/aws-java-sdk-core.jar
 	JAVA_PATH=$JAVA_PATH:/usr/share/java/aws-sdk-java/aws-java-sdk-rds.jar
-	# other dependencies
-	JAVA_PATH=$JAVA_PATH:/usr/share/java/HikariCP.jar
 	JAVA_PATH=$JAVA_PATH:/usr/lib/java/jna.jar
+	JAVA_PATH=$JAVA_PATH:/usr/share/java/jna/jna-platform.jar
+	JAVA_PATH=$JAVA_PATH:/usr/share/java/HikariCP.jar
 
 	java -Xmx1024m -cp $JAVA_PATH org.junit.runner.JUnitCore "$1"
 }
