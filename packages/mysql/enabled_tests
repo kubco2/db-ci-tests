@@ -1,0 +1,7 @@
+install
+install-all-pkgs
+service-start
+basic-usage
+service-stop
+multiple-instances
+uninstall
