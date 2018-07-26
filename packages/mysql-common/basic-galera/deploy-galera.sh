@@ -49,7 +49,10 @@ wsrep_cluster_name="my_wsrep_cluster"
 
 wsrep_cluster_address='gcomm://${IP}:4567'
 wsrep_provider_options='base_port=14567;'
-wsrep_sst_receive_address=${IP}:2777
+
+# this instance is used, so we should keep default port 4444 for selinux purposes
+wsrep_sst_receive_address=${IP}
+
 wsrep_provider_options='ist.recv_addr=${IP}:2888;'
 wsrep_node_address=${IP}:14567
 
