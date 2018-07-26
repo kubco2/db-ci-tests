@@ -73,10 +73,12 @@ trap cleanup EXIT
 
 # wait till we can connect
 for i in `seq 20` ; do
-  echo 'SELECT 1' | mysql --socket ${SOCKET2} test &>/dev/null && break || :
+  echo 'SELECT 1' | mysql --socket ${SOCKET2} mysql &>/dev/null && break || :
   sleep 2
 done
 [ $i -eq 20 ] && echo "Error: Connection to new server #2 does not work"
+# create test database if does not exist
+echo "CREATE DATABASE test;" | mysql || :
 echo "CREATE TABLE t1 (i INT); INSERT INTO t1 VALUES (42);" | mysql test
 echo "SELECT * FROM t1 LIMIT 1 \G" | mysql --socket ${SOCKET2} test | grep 'i: 42'
 echo "SHOW GLOBAL STATUS LIKE 'wsrep_ready' \G" | mysql | grep 'Value: ON'
