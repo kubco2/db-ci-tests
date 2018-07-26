@@ -33,9 +33,6 @@ DATA_DIR2=/var/lib/mysql2
 SOCKET2=${DATA_DIR2}/mysql.sock
 CONFIG_FILE2=/etc/my2.cnf
 
-# different ports require selinux re-settings, so far turning off selinux
-selinux_bak=$(getenforce)
-setenforce 0
 
 cat >${CONFIG_FILE2} <<EOF
 [mysqld]
@@ -69,7 +66,6 @@ pid=$!
 # make sure manually run daemon is killed on test end
 cleanup() {
   kill $pid
-  setenforce $selinux_bak
   service $SERVICE_NAME stop || :
 }
 trap cleanup EXIT
