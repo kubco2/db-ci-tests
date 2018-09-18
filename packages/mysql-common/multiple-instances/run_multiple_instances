@@ -20,7 +20,8 @@ service ${SERVICE_NAME} stop || :
 
 CONFIG_DIR=${SYSCONF_DIR}/my.cnf.d
 
-yum -y install ${INSTALL_PKGS} policycoreutils-python libselinux-utils policycoreutils-python-utils
+yum -y install ${INSTALL_PKGS} libselinux-utils
+yum -y install policycoreutils-python || yum -y install policycoreutils-python-utils
 
 # clean default config that might be taken into account,
 # because order is not defined in configuration files reading
