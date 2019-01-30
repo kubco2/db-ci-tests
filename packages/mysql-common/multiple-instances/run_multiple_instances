@@ -22,6 +22,7 @@ CONFIG_DIR=${SYSCONF_DIR}/my.cnf.d
 
 yum -y install ${INSTALL_PKGS} libselinux-utils
 yum -y install policycoreutils-python || yum -y install policycoreutils-python-utils
+yum -y install /usr/sbin/semanage
 
 # clean default config that might be taken into account,
 # because order is not defined in configuration files reading
